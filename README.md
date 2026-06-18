@@ -4,7 +4,7 @@ A robust uptime monitoring solution designed for tracking the availability and p
 
 ## Preview
 
-![UptimeKit Dashboard](./screenshots/preview.png)
+
 
 ## Key Features
 
@@ -36,14 +36,15 @@ The most efficient method to deploy UptimeKit is using Docker and Docker Compose
 
 **Quick Start:**
 
-```bash
-# Clone the repository
-git clone https://github.com/abhixdd/UptimeKit.git
-cd UptimeKit
+Working URLs (will show 🟢 Operational):
+https://example.com
+https://google.com
+https://github.com
+https://cloudflare.com
 
-# Build and initiate the stack
-docker-compose up --build
-```
+Broken URLs (will show 🔴 Degraded):
+https://this-does-not-exist-999.com
+https://broken.invalid
 
 **Access Points:**
 - **Frontend Dashboard**: `http://localhost:5173`
