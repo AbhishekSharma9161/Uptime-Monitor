@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import axios from 'axios';
+import { apiClient } from '../lib/api';
 import { useForm } from 'react-hook-form';
 import {
   Dialog,
@@ -28,7 +28,7 @@ const AddMonitorDialog = () => {
   });
 
   const addMonitorMutation = useMutation({
-    mutationFn: (data) => axios.post('/api/monitors', { ...data, type: monitorType }),
+    mutationFn: (data) => apiClient.post('/api/monitors', { ...data, type: monitorType }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['monitors'] });
       setOpen(false);

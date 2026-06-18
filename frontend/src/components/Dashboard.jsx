@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import axios from 'axios';
+import { apiClient } from '../lib/api';
 import { useState, useRef, useEffect } from 'react';
 import { createSwapy } from 'swapy';
 import MonitorCard from './MonitorCard';
@@ -30,7 +30,7 @@ const Dashboard = ({ theme, setTheme }) => {
 
   const { data: monitors = [], isLoading, error, refetch } = useQuery({
     queryKey: ['monitors'],
-    queryFn: () => axios.get('/api/monitors').then(res => res.data),
+    queryFn: () => apiClient.get('/api/monitors').then(res => res.data),
     refetchInterval: 30000,
   });
 
@@ -45,7 +45,7 @@ const Dashboard = ({ theme, setTheme }) => {
   };
 
   const deleteMonitorMutation = useMutation({
-    mutationFn: (id) => axios.delete(`/api/monitors/${id}`),
+    mutationFn: (id) => apiClient.delete(`/api/monitors/${id}`),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['monitors'] });
     },

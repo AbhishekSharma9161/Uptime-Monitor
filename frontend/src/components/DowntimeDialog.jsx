@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from './ui/dialog';
 import { AlertTriangle, Clock, Calendar } from 'lucide-react';
-import axios from 'axios';
+import { apiClient } from '../lib/api';
 import { parseUTC } from '../lib/timezone';
 import { formatDistanceToNow } from 'date-fns';
 
@@ -13,8 +13,8 @@ const DowntimeDialog = ({ monitorId, isOpen, onClose }) => {
     if (!isOpen) return;
     
     setLoading(true);
-    axios
-      .get(`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/monitors/${monitorId}/downtime`)
+    apiClient
+      .get(`/api/monitors/${monitorId}/downtime`)
       .then((res) => setDowntimes(res.data.downtimes || []))
       .catch((err) => console.error('Error fetching downtime:', err))
       .finally(() => setLoading(false));
